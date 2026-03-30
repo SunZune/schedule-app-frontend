@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: '/api' })
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/+$/, '')
+const api = axios.create({ baseURL: API_BASE_URL })
 
 export interface UploadResult {
   session_id: string
@@ -65,4 +66,4 @@ export const calcAll = async (
 export const getColorDownloadUrl = (
   sessionId: string,
   name: string,
-) => `/api/color-download?session_id=${sessionId}&name=${encodeURIComponent(name)}`
+) => `${API_BASE_URL}/color-download?session_id=${sessionId}&name=${encodeURIComponent(name)}`
